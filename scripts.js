@@ -14,15 +14,15 @@
             $lines = $('textarea').val().split(/\n/),
             unsortedArrayOfColorObjects = [];
 
-        for (var i=0; i < $lines.length; i++) {
-          // only push this line if it contains a non whitespace character.
-          if (/\S/.test($lines[i])) {
-              unsortedArrayOfColorObjects.push({
-                  hex: $.trim($lines[i])
-              });
-          }
+        for (var i = 0; i < $lines.length; i++) {
+            var matches = $lines[i].match(/#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})/g);
+            if (matches) {
+                for (var j = 0; j < matches.length; j++) {
+                    unsortedArrayOfColorObjects.push({ hex: matches[j] });
+                }
+            }
         }
-
+        
         var sortedArrayOfColorObjects = sortColors(unsortedArrayOfColorObjects);
 
         // Empty first
